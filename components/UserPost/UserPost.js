@@ -1,26 +1,57 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Text, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import UserProfileImage from '../UserProfileImage/UserProfileImage';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faEllipsisH} from '@fortawesome/free-solid-svg-icons';
+import {
+  faBookmark,
+  faEllipsisH,
+  faHeart,
+  faMessage,
+} from '@fortawesome/free-solid-svg-icons';
+import style from './style';
 
 const UserPost = props => {
   return (
-    <View>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <UserProfileImage
-          profileImage={props.profileImage}
-          imageDimensions={48}
-        />
-
-        <View style={{justifyContent: 'center', marginLeft: 10}}>
-          <Text>
-            {props.firstName} {props.lastName}
-          </Text>
-          {props.location && <Text>{props.location}</Text>}
+    <View style={style.userPostContainer}>
+      <View style={style.user}>
+        <View style={style.userContainer}>
+          <UserProfileImage
+            profileImage={props.profileImage}
+            imageDimensions={48}
+          />
+          <View style={style.userTextContainer}>
+            <Text style={style.username}>
+              {props.firstName} {props.lastName}
+            </Text>
+            {props.location && (
+              <Text style={style.location}>{props.location}</Text>
+            )}
+          </View>
         </View>
-        <FontAwesomeIcon icon={faEllipsisH} />
+        <FontAwesomeIcon icon={faEllipsisH} size={24} color={'#78969F'} />
+      </View>
+      <View style={style.postImage}>
+        <Image source={props.image} />
+      </View>
+      <View style={{marginLeft: 10, flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row'}}>
+          <FontAwesomeIcon icon={faHeart} color={'#79869f'} />
+          <Text style={{marginLeft: 3, color: '#79869f'}}>{props.likes}</Text>
+        </View>
+        <View style={{flexDirection: 'row', marginLeft: 27}}>
+          <FontAwesomeIcon icon={faMessage} color={'#79869f'} />
+          <Text style={{marginLeft: 3, color: '#79869f'}}>
+            {props.comments}
+          </Text>
+        </View>
+        <View style={{flexDirection: 'row', marginLeft: 27}}>
+          <FontAwesomeIcon icon={faBookmark} color={'#79869f'} />
+          <Text style={{marginLeft: 3, color: '#79869f'}}>
+            {props.bookmarks}
+          </Text>
+        </View>
       </View>
     </View>
   );
